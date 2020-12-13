@@ -1,0 +1,44 @@
+﻿
+@media only screen and (max-width: 800px), only screen and (max-device-width: 800px) {
+
+    .title {
+        font-size: 10px;
+    }
+
+    .views {
+        font-size: 8px;
+    }
+
+    .videoH {
+        height: 100%;
+    }
+
+    .imagelogo {
+        width: 50%;
+    }
+    
+    .image {
+        height: auto;
+        width: 100%;
+    }
+}
+
+@media only screen and (min-width: 900px) {
+
+    .title {
+        font-size: 20px;
+    }
+
+    .videoH {
+        height: 350px;
+    }
+
+    .imagelogo {
+        width: 100%;
+    }
+    
+    .image {
+        height: 262px;
+        width: 350px;
+    }
+}

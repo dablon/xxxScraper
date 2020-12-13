@@ -1,0 +1,190 @@
+﻿@{
+    ViewBag.Title = "PornMaleon";
+}
+
+<input type="hidden" id="categoria" />
+<input type="hidden" id="page" />
+<div id="listVideos">
+    @Html.Action("List")
+</div>
+<style>
+    .foo {
+        overflow-y: hidden;
+    }
+
+    .btnconfirm {
+        font-size: 41px;
+        padding-right: 50px;
+        padding-left: 50px;
+    }
+
+    .progress-bar.animate {
+        width: 100%;
+    }
+
+
+    .views {
+        background-color: #000;
+        color: #F90;
+        /* padding-bottom: 24px; */
+        position: absolute;
+        margin-top: -20px;
+        right: 14px;
+        opacity: 0.7;
+    }
+
+
+    .title {
+        color: #F90;
+        text-decoration: none;
+        outline-style: none;
+        /*font-size: 20px;*/
+        position: absolute;
+        background-color: #000;
+        opacity: 0.7;
+    }
+
+</style>
+
+
+@*<div id="list">
+
+        @Html.Action("List")
+
+
+    </div>*@
+
+
+@section scripts{
+
+    <script>
+        pornmaleon.addSelectPickers("#listVideos");
+
+        $("#listVideos").on("click", "#btnMore", function () {
+            //loading controls
+            pornmaleon.showPleaseWait();
+            var filter = $("#categoria").val();
+            var provider = $("#provider").val();
+            var page = $("#page").val();
+            if (filter) {
+                $("#btnMore").text("Loading...");
+                var url = "Videos/List/" + filter + "/null/" + page;
+            } else if (provider) {
+                var url = "Videos/List/null/"+provider+"/" + page;
+
+            }
+            else {
+                var url = "@Url.Action("List")";
+            }
+            pornmaleon.load("listVideos", url, function () {
+                pornmaleon.addSelectPickers("#listVideos");
+
+                cont++;
+                $("#page").val(cont);
+                pornmaleon.hidePleaseWait();
+                $("#btnMore").text("More");
+                if (filter) {
+                    $("#catext").text(filter);
+                }
+
+            }, function (data) {
+                pornmaleon.addSelectPickers("#listVideos");
+
+                pornmaleon.hidePleaseWait();
+                $("#btnMore").text("More");
+            });
+        });
+
+        var cont = 1;
+        $("#listVideos").on("change", "#filter", function () {
+            $("#provider").val("");
+            var filter = $("#filter :selected").text();
+            var page = 1;
+            cont = 1;
+            var url = "Videos/List/" + filter + "/null/" + page;
+
+            if (filter != "" && filter != "Category") {
+                $("#btnMore").text("Loading...");
+                pornmaleon.showPleaseWait();
+                debugger;
+
+                pornmaleon.load("listVideos", url, function () {
+                    pornmaleon.addSelectPickers("#listVideos");
+                    cont++;
+                    pornmaleon.hidePleaseWait();
+                    $("#categoria").val(filter);
+                    $("#page").val(cont);
+                    $("#btnMore").text("More");
+                    $("#catext").text(filter);
+                }, function () {
+                    debugger;
+                    pornmaleon.addSelectPickers("#listVideos");
+                    pornmaleon.hidePleaseWait();
+                    $("#btnMore").text("More");
+                });
+            }
+        });
+
+        $("#listVideos").on("change", "#provider", function () {
+            var filter = "null";
+            $("#categoria").val("");
+            var provider = $("#provider :selected").text();
+            var page = 1;
+            cont = 1;
+            var url = "Videos/List/" + filter + "/"+provider+ "/"+ page;
+
+            if (provider != "" && provider != "Sources") {
+                $("#btnMore").text("Loading...");
+                pornmaleon.showPleaseWait();
+                pornmaleon.load("listVideos", url, function () {
+                    pornmaleon.addSelectPickers("#listVideos");
+                    cont++;
+                    pornmaleon.hidePleaseWait();
+                    $("#provider").val(provider);
+                    $("#page").val(cont);
+                    $("#btnMore").text("More");
+                   
+                }, function () {
+                    pornmaleon.addSelectPickers("#listVideos");
+                    pornmaleon.hidePleaseWait();
+                    $("#btnMore").text("More");
+                });
+            }
+        });
+
+
+        $("#listVideos").on("click", ".image", function () {
+            var video = $(this).data("id");
+            pornmaleon.showPleaseWait();
+
+            var url = "Videos/Video/" + video;
+            pornmaleon.openModal(url, "master-modal", function () {
+                pornmaleon.hidePleaseWait();
+            });
+        });
+        $("#listVideos").on("click", "#btnFinder", function () {
+            pornmaleon.showPleaseWait();
+            var finder = $("#finder").val();
+
+            if (finder != "") {
+                $("#btnMore").text("Loading...");
+                var url = "Videos/FindVideos/" + finder;
+                pornmaleon.load("listVideos", url, function () {
+                    pornmaleon.addSelectPickers("#listVideos");
+
+                    cont++;
+                    pornmaleon.hidePleaseWait();
+                    $("#btnMore").text("More");
+                }, function (data) {
+                    pornmaleon.addSelectPickers("#listVideos");
+
+                    pornmaleon.hidePleaseWait();
+                    $("#btnMore").text("More");
+                });
+            }
+
+        });
+        $('#master-modal').on('hidden.bs.modal', function () {
+            $(this).removeData('bs.modal');
+        });
+    </script>}

@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="pornmaleonModel.Store" Alias="Self" Provider="System.Data.SqlServerCe.4.0" ProviderManifestToken="4.0" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="pornmaleonModelStoreContainer">
+          <EntitySet Name="Videos" EntityType="pornmaleonModel.Store.Videos" store:Type="Tables" />
+        </EntityContainer>
+        <EntityType Name="Videos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ChannekId" Type="ntext" />
+          <Property Name="Title" Type="ntext" />
+          <Property Name="Description" Type="ntext" />
+          <Property Name="Img" Type="ntext" />
+          <Property Name="PublishDate" Type="ntext" />
+          <Property Name="Url" Type="ntext" />
+          <Property Name="Views" Type="ntext" />
+          <Property Name="Search" Type="ntext" />
+          <Property Name="Comment" Type="ntext" />
+          <Property Name="Category" Type="ntext" />
+          <Property Name="Creation" Type="datetime" />
+          <Property Name="Rank" Type="ntext" />
+          <Property Name="State" Type="bit" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="pornmaleonModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="pornmaleonEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Videos" EntityType="pornmaleonModel.Videos" />
+        </EntityContainer>
+        <EntityType Name="Videos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Guid" Nullable="false" />
+          <Property Name="ChannekId" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Img" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="PublishDate" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Url" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Views" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Search" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Comment" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Category" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Creation" Type="DateTime" Precision="3" />
+          <Property Name="Rank" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="State" Type="Boolean" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="pornmaleonModelStoreContainer" CdmEntityContainer="pornmaleonEntities">
+          <EntitySetMapping Name="Videos">
+            <EntityTypeMapping TypeName="pornmaleonModel.Videos">
+              <MappingFragment StoreEntitySet="Videos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ChannekId" ColumnName="ChannekId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Img" ColumnName="Img" />
+                <ScalarProperty Name="PublishDate" ColumnName="PublishDate" />
+                <ScalarProperty Name="Url" ColumnName="Url" />
+                <ScalarProperty Name="Views" ColumnName="Views" />
+                <ScalarProperty Name="Search" ColumnName="Search" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="Creation" ColumnName="Creation" />
+                <ScalarProperty Name="Rank" ColumnName="Rank" />
+                <ScalarProperty Name="State" ColumnName="State" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

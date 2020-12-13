@@ -1,0 +1,92 @@
+﻿@model PagedList.IPagedList<xxx.Videos>
+@using PagedList.Mvc;
+
+@{
+    string filter = ViewBag.filter == null ? string.Empty : ViewBag.filter;
+    string provider = ViewBag.provider == null ? string.Empty : ViewBag.provider;
+    var finder = string.Empty;
+
+}
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="row">
+        <h1 id="catext" style="color:#F90;text-align:left"></h1>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-xs-6 col-sm-6 pull-left">
+
+            <div class="form-group">
+                @Html.DropDownListFor(m => filter, (SelectList)ViewBag.categorias, "Category", new { @class = "form-control" })
+
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-xs-6 col-sm-6 pull-left">
+
+            <div class="form-group">
+                @Html.DropDownListFor(m => provider, (SelectList)ViewBag.providers, "Sources", new { @class = "form-control" })
+
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-xs-6 col-sm-6 pull-right">
+        </div>
+        @*<div class="col-lg-4 col-md-4 col-xs-6 col-sm-6 pull-right">
+
+                @Html.TextBoxFor(m => finder)
+                <button id="btnFinder" class="btn btn-default">Find</button>
+            </div>*@
+    </div>
+
+    @if (Model.Count() > 0)
+    {
+        <div class="row">
+            @foreach (var item in Model)
+            {
+
+                <div class="col-lg-4 col-md-4 col-xs-6 col-sm-6 ">
+                    <div class="form-group image" style="cursor:pointer" data-id="@item.id">
+                        <div class=" clearfix ">
+                            <p class="title" data-id="@item.id">
+                                <strong>@item.Title</strong>
+                            </p>
+                        </div>
+                        @if (item.Img != null)
+                        {
+                            <div>
+                                <img src="@item.Img" style="width:100%;" />
+                            </div>
+                        }
+                        else
+                        {
+                            <iframe id="video" style="display:none;" class="foo" width="100%" height="250px" frameborder="0" scrolling="no" src="@item.Url" allowfullscreen></iframe>
+                        }
+
+                        <p class="views">
+                            Views: @item.Views
+                        </p>
+
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="row text-center" style="margin-top:20px;">
+            @*Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount*@
+
+            @*@Html.PagedListPager(Model, page => Url.Action("Videos", new { filter=filter,page }))*@
+            @if (Model.Count() > 17)
+            {
+                <button class="btn btn-primary btnconfirm" id="btnMore" style="background-color: #F90;" type="submit">More</button>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="panel panel-default no-results" style="background-color: #000;">
+            <div class="panel-body" style="text-align:center;">
+                <span style=" color:white">Sorry there is not videos available. Try again later</span>
+            </div>
+        </div>
+    }
+</div>
+
+
